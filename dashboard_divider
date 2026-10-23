@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divider</title>
+<style>
+  :root { --text:#64748b; --line:#cbd5e1; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --text:#94a3b8; --line:#334155; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --text:#94a3b8; --line:#334155; color-scheme: dark; }
+  html, body { margin:0; height:100%; background:transparent; }
+  body {
+    display:flex; align-items:center; gap:14px; padding:0 4px;
+    font:600 11px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--text);
+  }
+  .line { flex:1; height:1px; background:var(--line); }
+</style>
+</head>
+<body>
+  <span id="label"></span><span class="line"></span>
+<script>
+  const p = new URLSearchParams(location.search);
+  document.getElementById('label').textContent = p.get('label') || '';
+  const t = p.get('theme');
+  if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  if (!p.get('label')) document.getElementById('label').remove();
+</script>
+</body>
+</html>
